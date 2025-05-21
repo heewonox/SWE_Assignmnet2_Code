@@ -28,6 +28,7 @@ $(TARGET): $(OBJS)
 # Clean build files
 clean:
 	rm -f $(OBJS) $(TARGET)
+	rm -f output.txt
 
 # Optional: phony targets
 .PHONY: all clean

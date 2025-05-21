@@ -20,6 +20,7 @@ string SignUpUI::getPhone(ifstream& in_fp){
 void SignUpUI::ShowOutput(ofstream& out_fp, string id,string password,string phone){
 	out_fp<<"1.1. 회원가입"<<endl;
 	out_fp<<"> "<<id<<" "<<password<<" "<<phone<<" "<<endl;
+	out_fp<<endl;
 	return;
 }
 SignUp::SignUp(IDList *idlist){
@@ -45,6 +46,7 @@ string LogInUI::getPassword(ifstream& in_fp){
 void LogInUI::showOutput(ofstream& out_fp, string id,string password){
 	out_fp<<"2.1. 로그인"<<endl;
 	out_fp<<"> "<<id<<" "<<password<<endl;
+	out_fp<<endl;
 	return;
 }
 LogIn::LogIn(IDList *idlist){
@@ -67,8 +69,9 @@ string LogIn::setCurrentSessionID(ifstream& in_fp, ofstream& out_fp){
 }
 void LogOutUI::getInput(){}
 void LogOutUI::ShowOutput(ofstream& out_fp, string id){
-	out_fp<<"2.2 로그아웃"<<endl;
+	out_fp<<"2.2. 로그아웃"<<endl;
 	out_fp<<"> "<<id<<endl;
+	out_fp<<endl;
 }
 bool LogOut::isLogOutSuccessful(string id, ofstream& out_fp){
 	ui.getInput();
@@ -88,6 +91,7 @@ string AddBicycleUI::getProductName(ifstream& in_fp){
 void AddBicycleUI::ShowOutput(ofstream& out_fp, string id,string productName){
 	out_fp<<"3.1. 자전거 등록"<<endl;
 	out_fp<<"> "<<id<<" "<<productName<<endl;
+	out_fp<<endl;
 }
 AddBicycle::AddBicycle(BicycleList *list){
 	this->list=list;
@@ -106,6 +110,7 @@ string RentBicycleUI::getBikeID(ifstream& in_fp){
 void RentBicycleUI::ShowOutput(ofstream& out_fp, string bikeID,string productName){
 	out_fp<<"4.1. 자전거 대여"<<endl;
 	out_fp<<"> "<<bikeID<<" "<<productName<<endl;
+	out_fp<<endl;
 	return;
 }
 void RentBicycle::job(string userID,RentalStatusList *rL,BicycleList *bL, ifstream& in_fp, ofstream& out_fp){
@@ -120,9 +125,11 @@ void RentBicycle::job(string userID,RentalStatusList *rL,BicycleList *bL, ifstre
 }
 void ShowRentalInfoUI::getInput(){}
 void ShowRentalInfoUI::ShowOutput(ofstream& out_fp, Bicycle* bicycles[], int count){
+	out_fp<<"5.1. 자전거 대여 리스트"<<endl;
 	for(int i = 0; i < count; i++) {
 		out_fp<<"> "<<bicycles[i]->getID()<<" "<<bicycles[i]->getProductName()<<endl;
 	}
+	out_fp<<endl;
 }
 ShowRentalInfo::ShowRentalInfo(RentalStatusList *list){
 	this->list=list;

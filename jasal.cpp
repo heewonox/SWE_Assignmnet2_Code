@@ -114,7 +114,7 @@ void parsingCode(){
 					case 1:
 					{
 						//end
-						out_fp<<"6.1 종료"<<endl;
+						out_fp<<"6.1. 종료"<<endl;
 						isProgramExit=true;
 						break;
 					}

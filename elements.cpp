@@ -86,5 +86,5 @@ int RentalStatusList::fetchRentalStatusByID(string userID, Bicycle* result[]) co
 			result[count++] = list[i]->getBicycle();
 		}
 	}
-	return count-1;
+	return count;
 }
