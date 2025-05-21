@@ -79,3 +79,12 @@ void RentalStatusList::addNewRentalStatus(string userID,Bicycle *bicycle){
 	RentalStatus *newRentalStatus=new RentalStatus(userID,bicycle);
 	list[idx++]=newRentalStatus;
 }
+int RentalStatusList::fetchRentalStatusByID(string userID, Bicycle* result[]) const {
+	int count = 0;
+	for(int i = 0; i < idx; i++) {
+		if(list[i]->getUserID() == userID) {
+			result[count++] = list[i]->getBicycle();
+		}
+	}
+	return count-1;
+}

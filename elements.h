@@ -1,5 +1,6 @@
 #include<map>
 #include<string>
+#include<vector>
 #define lenList 300
 using namespace std;
 class Accounts{
@@ -53,10 +54,13 @@ public:
 	Bicycle* getBicycle();
 };
 class RentalStatusList{
-//fuck!!!
-public:
+private:
 	RentalStatus *list[lenList];
 	int idx;
+public:
 	RentalStatusList();
 	void addNewRentalStatus(string userID,Bicycle *bicycle);
+	int getSize() const { return idx; }
+	RentalStatus* getRentalStatus(int index) const { return list[index]; }
+	int fetchRentalStatusByID(string userID, Bicycle* result[]) const;
 };

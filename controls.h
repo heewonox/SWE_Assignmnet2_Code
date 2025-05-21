@@ -59,7 +59,7 @@ public:
 class ShowRentalInfoUI{
 public:
 	void getInput();
-	void ShowOutput(ofstream& out_fp, string id,string productName);
+	void ShowOutput(ofstream& out_fp, Bicycle* bicycles[], int count);
 };
 class ShowRentalInfo{
 private:

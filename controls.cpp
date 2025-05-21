@@ -119,16 +119,16 @@ void RentBicycle::job(string userID,RentalStatusList *rL,BicycleList *bL, ifstre
 	ui.ShowOutput(out_fp, tmp->getID(),tmp->getProductName());
 }
 void ShowRentalInfoUI::getInput(){}
-void ShowRentalInfoUI::ShowOutput(ofstream& out_fp, string id,string productName){
-	out_fp<<"> "<<id<<" "<<productName<<endl;
+void ShowRentalInfoUI::ShowOutput(ofstream& out_fp, Bicycle* bicycles[], int count){
+	for(int i = 0; i < count; i++) {
+		out_fp<<"> "<<bicycles[i]->getID()<<" "<<bicycles[i]->getProductName()<<endl;
+	}
 }
 ShowRentalInfo::ShowRentalInfo(RentalStatusList *list){
 	this->list=list;
 }
 void ShowRentalInfo::job(string userID, ofstream& out_fp){
-	for(int i=0;i<list->idx;i++){
-		if(list->list[i]->getUserID()==userID){
-			ui.ShowOutput(out_fp, list->list[i]->getBicycle()->getID(),list->list[i]->getBicycle()->getProductName());
-		}
-	}
+	Bicycle* rentedBicycles[lenList];
+	int count = list->fetchRentalStatusByID(userID, rentedBicycles);
+	ui.ShowOutput(out_fp, rentedBicycles, count);
 }
