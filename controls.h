@@ -8,34 +8,9 @@ using namespace std;
  */
 class SignUpUI{
 public:
-	/**
-	 * @brief Reads user ID from input file.
-	 * @param in_fp Input file stream
-	 * @return The entered user ID
-	 */
 	string getID(ifstream& in_fp);
-	
-	/**
-	 * @brief Reads password from input file.
-	 * @param in_fp Input file stream
-	 * @return The entered password
-	 */
 	string getPassword(ifstream& in_fp);
-	
-	/**
-	 * @brief Reads phone number from input file.
-	 * @param in_fp Input file stream
-	 * @return The entered phone number
-	 */
 	string getPhone(ifstream& in_fp);
-	
-	/**
-	 * @brief Displays sign-up information to output file.
-	 * @param out_fp Output file stream
-	 * @param id User's ID
-	 * @param password User's password
-	 * @param phone User's phone number
-	 */
 	void ShowOutput(ofstream& out_fp, string id,string password,string phone);
 };
 
@@ -48,17 +23,6 @@ class SignUp{
 private:
 	SignUpUI ui;
 public:
-	/**
-	 * @brief Constructs a new SignUp controller.
-	 */
-	SignUp();
-	
-	/**
-	 * @brief Executes the sign-up process.
-	 * @param idlist Pointer to the account list
-	 * @param in_fp Input file stream
-	 * @param out_fp Output file stream
-	 */
 	void job(IDList* idlist, ifstream& in_fp, ofstream& out_fp);
 };
 
@@ -69,26 +33,8 @@ public:
  */
 class LogInUI{
 public:
-	/**
-	 * @brief Reads user ID from input file.
-	 * @param in_fp Input file stream
-	 * @return The entered user ID
-	 */
 	string getID(ifstream& in_fp);
-	
-	/**
-	 * @brief Reads password from input file.
-	 * @param in_fp Input file stream
-	 * @return The entered password
-	 */
 	string getPassword(ifstream& in_fp);
-	
-	/**
-	 * @brief Displays login information to output file.
-	 * @param out_fp Output file stream
-	 * @param id User's ID
-	 * @param password User's password
-	 */
 	void showOutput(ofstream& out_fp, string id,string password);
 };
 
@@ -101,24 +47,9 @@ class LogIn{
 private:
 	LogInUI ui;
 public:
-	/**
-	 * @brief Constructs a new LogIn controller.
-	 */
-	LogIn();
-	
-	/**
-	 * @brief Sets the current session ID based on login credentials.
-	 * @param idlist Pointer to the account list
-	 * @param in_fp Input file stream
-	 * @param out_fp Output file stream
-	 * @return The session ID if login successful, "guest" otherwise
-	 */
 	string setCurrentSessionID(IDList* idlist, ifstream& in_fp, ofstream& out_fp);
-	
-	/// @return true if current user is admin
+	//WTF???
 	bool isAdmin();
-	
-	/// @return true if current user has valid account
 	bool isValidAccount();
 };
 
@@ -129,14 +60,7 @@ public:
  */
 class LogOutUI{
 public:
-	/// Reads any necessary input for logout
 	void getInput();
-	
-	/**
-	 * @brief Displays logout information to output file.
-	 * @param out_fp Output file stream
-	 * @param id User's ID
-	 */
 	void ShowOutput(ofstream& out_fp, string id);
 };
 
@@ -149,17 +73,6 @@ class LogOut{
 private:
 	LogOutUI ui;
 public:
-	/**
-	 * @brief Constructs a new LogOut controller.
-	 */
-	LogOut();
-	
-	/**
-	 * @brief Executes the logout process.
-	 * @param id Current user's ID
-	 * @param out_fp Output file stream
-	 * @return true if logout successful
-	 */
 	bool isLogOutSuccessful(string id, ofstream& out_fp);
 };
 
@@ -170,19 +83,7 @@ public:
  */
 class RentBicycleUI{
 public:
-	/**
-	 * @brief Reads bicycle ID from input file.
-	 * @param in_fp Input file stream
-	 * @return The entered bicycle ID
-	 */
 	string getBikeID(ifstream& in_fp);
-	
-	/**
-	 * @brief Displays rental information to output file.
-	 * @param out_fp Output file stream
-	 * @param bikeID Bicycle's ID
-	 * @param productName Bicycle's product name
-	 */
 	void ShowOutput(ofstream& out_fp, string bikeID,string productName);
 };
 
@@ -195,19 +96,6 @@ class RentBicycle{
 private:
 	RentBicycleUI ui;
 public:
-	/**
-	 * @brief Constructs a new RentBicycle controller.
-	 */
-	RentBicycle();
-	
-	/**
-	 * @brief Executes the bicycle rental process.
-	 * @param userID ID of the user renting the bicycle
-	 * @param rentalList Pointer to the rental status list
-	 * @param bikeList Pointer to the bicycle list
-	 * @param in_fp Input file stream
-	 * @param out_fp Output file stream
-	 */
 	void job(string userID, RentalStatusList* rentalList, BicycleList* bikeList, ifstream& in_fp, ofstream& out_fp);
 };
 
@@ -218,15 +106,7 @@ public:
  */
 class ShowRentalInfoUI{
 public:
-	/// Reads any necessary input for showing rental info
 	void getInput();
-	
-	/**
-	 * @brief Displays rental information to output file.
-	 * @param out_fp Output file stream
-	 * @param bicycles Array of rented bicycles
-	 * @param count Number of bicycles in the array
-	 */
 	void ShowOutput(ofstream& out_fp, Bicycle* bicycles[], int count);
 };
 
@@ -239,17 +119,6 @@ class ShowRentalInfo{
 private:
 	ShowRentalInfoUI ui;
 public:
-	/**
-	 * @brief Constructs a new ShowRentalInfo controller.
-	 */
-	ShowRentalInfo();
-	
-	/**
-	 * @brief Executes the rental information display process.
-	 * @param userID ID of the user whose rentals to display
-	 * @param list Pointer to the rental status list
-	 * @param out_fp Output file stream
-	 */
 	void job(string userID, RentalStatusList* list, ofstream& out_fp);
 };
 
@@ -260,26 +129,8 @@ public:
  */
 class AddBicycleUI{
 public:
-	/**
-	 * @brief Reads bicycle ID from input file.
-	 * @param in_fp Input file stream
-	 * @return The entered bicycle ID
-	 */
 	string getID(ifstream& in_fp);
-	
-	/**
-	 * @brief Reads product name from input file.
-	 * @param in_fp Input file stream
-	 * @return The entered product name
-	 */
 	string getProductName(ifstream& in_fp);
-	
-	/**
-	 * @brief Displays bicycle registration information to output file.
-	 * @param out_fp Output file stream
-	 * @param id Bicycle's ID
-	 * @param productName Bicycle's product name
-	 */
 	void ShowOutput(ofstream& out_fp, string id,string productName);
 };
 
@@ -292,17 +143,6 @@ class AddBicycle{
 private:
 	AddBicycleUI ui;
 public:
-	/**
-	 * @brief Constructs a new AddBicycle controller.
-	 */
-	AddBicycle();
-	
-	/**
-	 * @brief Executes the bicycle addition process.
-	 * @param list Pointer to the bicycle list
-	 * @param in_fp Input file stream
-	 * @param out_fp Output file stream
-	 */
 	void job(BicycleList* list, ifstream& in_fp, ofstream& out_fp);
 };
 
