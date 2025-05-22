@@ -5,9 +5,24 @@
 #define OUTPUT_FILE_NAME "output.txt"
 
 using namespace std;
+
+/**
+ * @brief Parses and processes user commands from the input file.
+ * 
+ * This function handles the main program loop, reading commands and delegating
+ * to appropriate controllers based on the menu selection.
+ */
 void parsingCode();
-ifstream in_fp;
-ofstream out_fp;
+
+ifstream in_fp;   ///< Input file stream for reading commands
+ofstream out_fp;  ///< Output file stream for writing results
+
+/**
+ * @brief Main entry point of the bicycle rental system.
+ * 
+ * Initializes file streams and starts the command processing loop.
+ * @return 0 on successful execution
+ */
 int main(){
 	in_fp.open(INPUT_FILE_NAME);
 	out_fp.open(OUTPUT_FILE_NAME);
@@ -18,52 +33,50 @@ int main(){
 	out_fp.close();
 	return 0;
 }
-void parsingCode(){
-	int menu_level_1=0,menu_level_2=0;
-	bool isProgramExit=false;
-	
-	string CURRENT_SESSION_ID="guest";
-	
-	//Session-Wide Elements
-	IDList idlist;
-	BicycleList bicyclelist;
-	RentalStatusList rentalstatus;
 
-	//Controller instances
-	SignUp signup(&idlist);
-	LogIn login(&idlist);
-	LogOut logout;
-	RentBicycle rentbicycle;
-	ShowRentalInfo showrentalinfo(&rentalstatus);
-	AddBicycle addbicycle(&bicyclelist);
+void parsingCode(){
+	int menu_level_1=0,menu_level_2=0;  ///< Menu selection variables
+	bool isProgramExit=false;           ///< Program termination flag
+	
+	string CURRENT_SESSION_ID="guest";  ///< Current user's session ID, defaults to guest
+	
+	// Session-Wide Elements - Shared across all operations
+	IDList idlist;              ///< Manages user accounts
+	BicycleList bicyclelist;    ///< Manages bicycle inventory
+	RentalStatusList rentalstatus;  ///< Tracks bicycle rentals
+
+	// Controller instances for different operations
+	SignUp signup;              ///< Handles user registration
+	LogIn login;                ///< Handles user authentication
+	LogOut logout;              ///< Handles user logout
+	RentBicycle rentbicycle;    ///< Handles bicycle rental
+	ShowRentalInfo showrentalinfo;  ///< Displays rental information
+	AddBicycle addbicycle;      ///< Handles bicycle registration
 
 	while(!isProgramExit){
 		in_fp>>menu_level_1>>menu_level_2;
 		switch(menu_level_1){
-			case 1:
+			case 1:  // Account Management
 			{
 				switch(menu_level_2){
-					case 1:
+					case 1:  // Sign up
 					{
-						//Sign up
-						signup.job(in_fp, out_fp);
+						signup.job(&idlist, in_fp, out_fp);
 						break;
 					}
 				}
 				break;
 			}
-			case 2:
+			case 2:  // Session Management
 			{
 				switch(menu_level_2){
-					case 1:
+					case 1:  // Log in
 					{
-						//Log in
-						CURRENT_SESSION_ID=login.setCurrentSessionID(in_fp, out_fp);
+						CURRENT_SESSION_ID=login.setCurrentSessionID(&idlist, in_fp, out_fp);
 						break;
 					}
-					case 2:
+					case 2:  // Log out
 					{
-						//Log out
 						if(logout.isLogOutSuccessful(CURRENT_SESSION_ID, out_fp)){
 							CURRENT_SESSION_ID="guest";
 						}
@@ -72,48 +85,44 @@ void parsingCode(){
 				}
 				break;
 			}
-			case 3:
+			case 3:  // Bicycle Management
 			{
 				switch(menu_level_2){
-					case 1:
+					case 1:  // Add new Bike
 					{
-						//Add new Bike
-						addbicycle.job(in_fp, out_fp);
+						addbicycle.job(&bicyclelist, in_fp, out_fp);
 						break;
 					}
 				}
 				break;
 			}
-			case 4:
+			case 4:  // Rental Operations
 			{
 				switch(menu_level_2){
-					case 1:
+					case 1:  // Rent bike
 					{
-						//Rent bike
-						rentbicycle.job(CURRENT_SESSION_ID,&rentalstatus,&bicyclelist, in_fp, out_fp);
+						rentbicycle.job(CURRENT_SESSION_ID, &rentalstatus, &bicyclelist, in_fp, out_fp);
 						break;
 					}
 				}
 				break;
 			}
-			case 5:
+			case 5:  // Information Display
 			{
 				switch(menu_level_2){
-					case 1:
+					case 1:  // Show Rental info
 					{
-						//Show Rental info
-						showrentalinfo.job(CURRENT_SESSION_ID, out_fp);
+						showrentalinfo.job(CURRENT_SESSION_ID, &rentalstatus, out_fp);
 						break;
 					}
 				}
 				break;
 			}
-			case 6:
+			case 6:  // Program Control
 			{
 				switch (menu_level_2){
-					case 1:
+					case 1:  // End program
 					{
-						//end
 						out_fp<<"6.1. 종료"<<endl;
 						isProgramExit=true;
 						break;
