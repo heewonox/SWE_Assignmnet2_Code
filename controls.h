@@ -48,9 +48,6 @@ private:
 	LogInUI ui;
 public:
 	string setCurrentSessionID(IDList* idlist, ifstream& in_fp, ofstream& out_fp);
-	//WTF???
-	bool isAdmin();
-	bool isValidAccount();
 };
 
 /**

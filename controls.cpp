@@ -49,7 +49,7 @@ string SignUpUI::getPhone(ifstream& in_fp){
 void SignUpUI::ShowOutput(ofstream& out_fp, string id,string password,string phone){
 	// Display sign-up confirmation with user details
 	out_fp<<"1.1. 회원가입"<<endl;
-	out_fp<<"> "<<id<<" "<<password<<" "<<phone<<" "<<endl;
+	out_fp<<"> "<<id<<" "<<password<<" "<<phone<<endl;
 	out_fp<<endl;
 	return;
 }
