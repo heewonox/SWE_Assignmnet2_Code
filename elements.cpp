@@ -81,10 +81,24 @@ void RentalStatusList::addNewRentalStatus(string userID,Bicycle *bicycle){
 }
 int RentalStatusList::fetchRentalStatusByID(string userID, Bicycle* result[]) const {
 	int count = 0;
+	// First, collect all matching bicycles
 	for(int i = 0; i < idx; i++) {
 		if(list[i]->getUserID() == userID) {
 			result[count++] = list[i]->getBicycle();
 		}
 	}
+	
+	// Sort the results by bicycle ID using bubble sort
+	for(int i = 0; i < count - 1; i++) {
+		for(int j = 0; j < count - i - 1; j++) {
+			if(result[j]->getID() > result[j + 1]->getID()) {
+				// Swap the pointers
+				Bicycle* temp = result[j];
+				result[j] = result[j + 1];
+				result[j + 1] = temp;
+			}
+		}
+	}
+	
 	return count;
 }

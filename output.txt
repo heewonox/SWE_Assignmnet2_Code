@@ -23,7 +23,7 @@
 > b1 bikeMaker
 
 5.1. 자전거 대여 리스트
-> b2 bikeProducer
 > b1 bikeMaker
+> b2 bikeProducer
 
 6.1. 종료
