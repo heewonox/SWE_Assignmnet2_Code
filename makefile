@@ -6,13 +6,13 @@ CXX = clang++
 CXXFLAGS = -g -fcolor-diagnostics -fansi-escape-codes
 
 # Source files
-SRCS = jasal.cpp controls.cpp elements.cpp
+SRCS = main.cpp controls.cpp elements.cpp
 
 # Object files (automatically replace .cpp with .o)
 OBJS = $(SRCS:.cpp=.o)
 
 # Output executable
-TARGET = jasal
+TARGET = main.out
 
 # Default target
 all: $(TARGET)
