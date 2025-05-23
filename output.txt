@@ -11,7 +11,7 @@
 > admin
 
 1.1. 회원가입
-> kim pwdpwd 01011111111 
+> kim pwdpwd 01011111111
 
 2.1. 로그인
 > kim pwdpwd

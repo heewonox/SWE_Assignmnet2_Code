@@ -46,7 +46,7 @@ string SignUpUI::getPhone(ifstream& in_fp){
 *@param password User's password
 *@param phone User's phone number
 */
-void SignUpUI::ShowOutput(ofstream& out_fp, string id,string password,string phone){
+void SignUpUI::showOutput(ofstream& out_fp, string id,string password,string phone){
 	// Display sign-up confirmation with user details
 	out_fp<<"1.1. 회원가입"<<endl;
 	out_fp<<"> "<<id<<" "<<password<<" "<<phone<<endl;
@@ -57,19 +57,19 @@ void SignUpUI::ShowOutput(ofstream& out_fp, string id,string password,string pho
 
 /**
 *@brief Executes the sign-up process.
-*@param idlist Pointer to the account list
+*@param list Pointer to the account list
 *@param in_fp Input file stream
 *@param out_fp Output file stream
 */
-void SignUp::job(IDList* idlist, ifstream& in_fp, ofstream& out_fp){
+void SignUp::job(AccountList* list, ifstream& in_fp, ofstream& out_fp){
 	// Get user registration details
 	string id=ui.getID(in_fp);
 	string password=ui.getPassword(in_fp);
 	string phone=ui.getPhone(in_fp);
 	
 	// Create new account and display confirmation
-	idlist->addNewAccount(id,password,phone);
-	ui.ShowOutput(out_fp, id,password,phone);
+	list->addNewAccount(id,password,phone);
+	ui.showOutput(out_fp, id,password,phone);
 }
 
 // LogInUI implementation
@@ -114,19 +114,19 @@ void LogInUI::showOutput(ofstream& out_fp, string id,string password){
 
 /**
  * @brief Sets the current session ID based on login credentials.
- * @param idlist Pointer to the account list
+ * @param list Pointer to the account list
  * @param in_fp Input file stream
  * @param out_fp Output file stream
  * @return The session ID if login successful, "guest" otherwise
  */
-string LogIn::setCurrentSessionID(IDList* idlist, ifstream& in_fp, ofstream& out_fp){
+string LogIn::setCurrentSessionID(AccountList* list, ifstream& in_fp, ofstream& out_fp){
 	// Get login credentials
 	string id=ui.getID(in_fp);
 	string password=ui.getPassword(in_fp);
 	
 	// Check if user is admin or regular user
-	bool isAdmin=idlist->isAdmin(id,password);
-	bool isValidAccount=idlist->isValidAccount(id,password);
+	bool isAdmin=list->isAdmin(id,password);
+	bool isValidAccount=list->isValidAccount(id,password);
 	
 	if(isAdmin){
 		ui.showOutput(out_fp, id,password);
@@ -150,7 +150,7 @@ void LogOutUI::getInput(){}
  * @param out_fp Output file stream
  * @param id User's ID
  */
-void LogOutUI::ShowOutput(ofstream& out_fp, string id){
+void LogOutUI::showOutput(ofstream& out_fp, string id){
 	// Display logout confirmation
 	out_fp<<"2.2. 로그아웃"<<endl;
 	out_fp<<"> "<<id<<endl;
@@ -167,7 +167,7 @@ void LogOutUI::ShowOutput(ofstream& out_fp, string id){
 bool LogOut::isLogOutSuccessful(string id, ofstream& out_fp){
 	// Process logout and display confirmation
 	ui.getInput();
-	ui.ShowOutput(out_fp, id);
+	ui.showOutput(out_fp, id);
 	return true;
 }
 
@@ -202,7 +202,7 @@ string AddBicycleUI::getProductName(ifstream& in_fp){
  * @param id Bicycle's ID
  * @param productName Bicycle's product name
  */
-void AddBicycleUI::ShowOutput(ofstream& out_fp, string id,string productName){
+void AddBicycleUI::showOutput(ofstream& out_fp, string id,string productName){
 	// Display bicycle registration confirmation
 	out_fp<<"3.1. 자전거 등록"<<endl;
 	out_fp<<"> "<<id<<" "<<productName<<endl;
@@ -222,7 +222,7 @@ void AddBicycle::job(BicycleList* list, ifstream& in_fp, ofstream& out_fp){
 	string id=ui.getID(in_fp);
 	string productName=ui.getProductName(in_fp);
 	list->addNewBicycle(id,productName);
-	ui.ShowOutput(out_fp, id,productName);
+	ui.showOutput(out_fp, id,productName);
 }
 
 // RentBicycleUI implementation
@@ -231,7 +231,7 @@ void AddBicycle::job(BicycleList* list, ifstream& in_fp, ofstream& out_fp){
  * @param in_fp Input file stream
  * @return The entered bicycle ID
  */
-string RentBicycleUI::getBikeID(ifstream& in_fp){
+string RentBicycleUI::getBicycleID(ifstream& in_fp){
 	// Read bicycle ID to rent from input file
 	string id;
 	in_fp>>id;
@@ -244,7 +244,7 @@ string RentBicycleUI::getBikeID(ifstream& in_fp){
  * @param bikeID Bicycle's ID
  * @param productName Bicycle's product name
  */
-void RentBicycleUI::ShowOutput(ofstream& out_fp, string bikeID,string productName){
+void RentBicycleUI::showOutput(ofstream& out_fp, string bikeID,string productName){
 	// Display rental confirmation
 	out_fp<<"4.1. 자전거 대여"<<endl;
 	out_fp<<"> "<<bikeID<<" "<<productName<<endl;
@@ -264,7 +264,7 @@ void RentBicycleUI::ShowOutput(ofstream& out_fp, string bikeID,string productNam
  */
 void RentBicycle::job(string userID, RentalStatusList* rentalList, BicycleList* bikeList, ifstream& in_fp, ofstream& out_fp){
 	// Get bicycle ID from user input
-	string bikeID=ui.getBikeID(in_fp);
+	string bikeID=ui.getBicycleID(in_fp);
 	
 	// First: verify the bicycle exists in the system
 	Bicycle* tmp=bikeList->fetchBicycleByID(bikeID);
@@ -273,7 +273,7 @@ void RentBicycle::job(string userID, RentalStatusList* rentalList, BicycleList* 
 	rentalList->addNewRentalStatus(userID,tmp);
 	
 	// Finally: display confirmation to user
-	ui.ShowOutput(out_fp, tmp->getID(),tmp->getProductName());
+	ui.showOutput(out_fp, tmp->getID(),tmp->getProductName());
 }
 
 // ShowRentalInfoUI implementation
@@ -288,7 +288,7 @@ void ShowRentalInfoUI::getInput(){}
  * @param bicycles Array of rented bicycles
  * @param count Number of bicycles in the array
  */
-void ShowRentalInfoUI::ShowOutput(ofstream& out_fp, Bicycle* bicycles[], int count){
+void ShowRentalInfoUI::showOutput(ofstream& out_fp, Bicycle* bicycles[], int count){
 	// Display list of rented bicycles
 	out_fp<<"5.1. 자전거 대여 리스트"<<endl;
 	for(int i = 0; i < count; i++) {
@@ -308,5 +308,5 @@ void ShowRentalInfo::job(string userID, RentalStatusList* list, ofstream& out_fp
 	// Get and display user's rented bicycles
 	Bicycle* rentedBicycles[lenList];
 	int count = list->fetchRentalStatusByID(userID, rentedBicycles);
-	ui.ShowOutput(out_fp, rentedBicycles, count);
+	ui.showOutput(out_fp, rentedBicycles, count);
 }

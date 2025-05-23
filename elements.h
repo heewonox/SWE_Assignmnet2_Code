@@ -18,7 +18,6 @@ public:
 	Accounts(string id,string password,string phone);
 	string getID();
 	string getPassword();
-	string getPhone();
 };
 
 /**
@@ -26,15 +25,15 @@ public:
  * 
  * Provides functionality for account management and authentication.
  */
-class IDList{
+class AccountList{
 private:
 	Accounts* list[lenList];  ///< Array of account pointers
 	int idx;                  ///< Current number of accounts
 public:
-	IDList();
-	void addNewAccount(string id,string password,string phone);
+	AccountList();
 	bool isAdmin(string id,string password);
 	bool isValidAccount(string id,string password);
+	void addNewAccount(string id,string password,string phone);
 };
 
 /**

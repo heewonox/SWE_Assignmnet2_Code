@@ -11,7 +11,7 @@ public:
 	string getID(ifstream& in_fp);
 	string getPassword(ifstream& in_fp);
 	string getPhone(ifstream& in_fp);
-	void ShowOutput(ofstream& out_fp, string id,string password,string phone);
+	void showOutput(ofstream& out_fp, string id,string password,string phone);
 };
 
 /**
@@ -23,7 +23,7 @@ class SignUp{
 private:
 	SignUpUI ui;
 public:
-	void job(IDList* idlist, ifstream& in_fp, ofstream& out_fp);
+	void job(AccountList* list, ifstream& in_fp, ofstream& out_fp);
 };
 
 /**
@@ -47,7 +47,7 @@ class LogIn{
 private:
 	LogInUI ui;
 public:
-	string setCurrentSessionID(IDList* idlist, ifstream& in_fp, ofstream& out_fp);
+	string setCurrentSessionID(AccountList* list, ifstream& in_fp, ofstream& out_fp);
 };
 
 /**
@@ -58,7 +58,7 @@ public:
 class LogOutUI{
 public:
 	void getInput();
-	void ShowOutput(ofstream& out_fp, string id);
+	void showOutput(ofstream& out_fp, string id);
 };
 
 /**
@@ -80,8 +80,8 @@ public:
  */
 class RentBicycleUI{
 public:
-	string getBikeID(ifstream& in_fp);
-	void ShowOutput(ofstream& out_fp, string bikeID,string productName);
+	string getBicycleID(ifstream& in_fp);
+	void showOutput(ofstream& out_fp, string bikeID,string productName);
 };
 
 /**
@@ -104,7 +104,7 @@ public:
 class ShowRentalInfoUI{
 public:
 	void getInput();
-	void ShowOutput(ofstream& out_fp, Bicycle* bicycles[], int count);
+	void showOutput(ofstream& out_fp, Bicycle* bicycles[], int count);
 };
 
 /**
@@ -128,7 +128,7 @@ class AddBicycleUI{
 public:
 	string getID(ifstream& in_fp);
 	string getProductName(ifstream& in_fp);
-	void ShowOutput(ofstream& out_fp, string id,string productName);
+	void showOutput(ofstream& out_fp, string id,string productName);
 };
 
 /**

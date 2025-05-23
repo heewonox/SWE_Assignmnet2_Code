@@ -29,18 +29,11 @@ string Accounts::getPassword(){
 	return password;
 }
 
-/**
- * @return The user's phone number
- */
-string Accounts::getPhone(){
-	return phone;
-}
 
-// IDList class implementation
 /**
  * @brief Constructs a new empty account list.
  */
-IDList::IDList(){
+AccountList::AccountList(){
 	idx=0;
 	// Initialize with admin account
 	this->addNewAccount("admin","admin","PLACEHOLDER_ADMIN_PHONE");
@@ -52,7 +45,7 @@ IDList::IDList(){
  * @param password User's password
  * @param phone User's phone number
  */
-void IDList::addNewAccount(string id,string password,string phone){
+void AccountList::addNewAccount(string id,string password,string phone){
 	// Create new account and add to list
 	Accounts *newAccount=new Accounts(id,password,phone);
 	list[idx++]=newAccount;
@@ -64,7 +57,7 @@ void IDList::addNewAccount(string id,string password,string phone){
  * @param password User's password
  * @return true if credentials match an admin account
  */
-bool IDList::isAdmin(string id,string password){
+bool AccountList::isAdmin(string id,string password){
 	// Check if credentials match admin account
 	if(id=="admin"&&password=="admin"){
 		return true;
@@ -78,7 +71,7 @@ bool IDList::isAdmin(string id,string password){
  * @param password User's password
  * @return true if credentials are valid
  */
-bool IDList::isValidAccount(string id,string password){
+bool AccountList::isValidAccount(string id,string password){
 	// Linear search through accounts to validate credentials
 	for(int i=0;i<this->idx;i++){
 		if(list[i]->getID()==id&&list[i]->getPassword()==password){

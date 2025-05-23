@@ -41,7 +41,7 @@ void parsingCode(){
 	string CURRENT_SESSION_ID="guest";  ///< Current user's session ID, defaults to guest
 	
 	// Session-Wide Elements - Shared across all operations
-	IDList idlist;              ///< Manages user accounts
+	AccountList accountlist;              ///< Manages user accounts
 	BicycleList bicyclelist;    ///< Manages bicycle inventory
 	RentalStatusList rentalstatus;  ///< Tracks bicycle rentals
 
@@ -61,7 +61,7 @@ void parsingCode(){
 				switch(menu_level_2){
 					case 1:  // Sign up
 					{
-						signup.job(&idlist, in_fp, out_fp);
+						signup.job(&accountlist, in_fp, out_fp);
 						break;
 					}
 				}
@@ -72,7 +72,7 @@ void parsingCode(){
 				switch(menu_level_2){
 					case 1:  // Log in
 					{
-						CURRENT_SESSION_ID=login.setCurrentSessionID(&idlist, in_fp, out_fp);
+						CURRENT_SESSION_ID=login.setCurrentSessionID(&accountlist, in_fp, out_fp);
 						break;
 					}
 					case 2:  // Log out
@@ -123,7 +123,7 @@ void parsingCode(){
 				switch (menu_level_2){
 					case 1:  // End program
 					{
-						out_fp<<"6.1. 종료"<<endl;
+						out_fp<<"6.1. 종료";
 						isProgramExit=true;
 						break;
 					}
