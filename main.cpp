@@ -14,8 +14,8 @@ using namespace std;
  */
 void parsingCode();
 
-ifstream in_fp;   ///< Input file stream for reading commands
-ofstream out_fp;  ///< Output file stream for writing results
+ifstream in_fp;   
+ofstream out_fp;  
 
 /**
  * @brief Main entry point of the bicycle rental system.
@@ -35,28 +35,28 @@ int main(){
 }
 
 void parsingCode(){
-	int menu_level_1=0,menu_level_2=0;  ///< Menu selection variables
-	bool isProgramExit=false;           ///< Program termination flag
+	int menu_level_1=0,menu_level_2=0;  
+	bool isProgramExit=false;           
 	
 	string CURRENT_SESSION_ID="guest";  ///< Current user's session ID, defaults to guest
 	
 	// Session-Wide Elements - Shared across all operations
-	AccountList accountlist;              ///< Manages user accounts
-	BicycleList bicyclelist;    ///< Manages bicycle inventory
-	RentalStatusList rentalstatus;  ///< Tracks bicycle rentals
+	AccountList accountlist;            
+	BicycleList bicyclelist;   
+	RentalStatusList rentalstatus;
 
 	// Controller instances for different operations
-	SignUp signup;              ///< Handles user registration
-	LogIn login;                ///< Handles user authentication
-	LogOut logout;              ///< Handles user logout
-	RentBicycle rentbicycle;    ///< Handles bicycle rental
-	ShowRentalInfo showrentalinfo;  ///< Displays rental information
-	AddBicycle addbicycle;      ///< Handles bicycle registration
+	SignUp signup;              
+	LogIn login;                
+	LogOut logout;              
+	RentBicycle rentbicycle;    
+	ShowRentalInfo showrentalinfo;
+	AddBicycle addbicycle;      
 
 	while(!isProgramExit){
 		in_fp>>menu_level_1>>menu_level_2;
 		switch(menu_level_1){
-			case 1:  // Account Management
+			case 1:  
 			{
 				switch(menu_level_2){
 					case 1:  // Sign up
@@ -85,7 +85,7 @@ void parsingCode(){
 				}
 				break;
 			}
-			case 3:  // Bicycle Management
+			case 3:  
 			{
 				switch(menu_level_2){
 					case 1:  // Add new Bike
@@ -96,7 +96,7 @@ void parsingCode(){
 				}
 				break;
 			}
-			case 4:  // Rental Operations
+			case 4:  
 			{
 				switch(menu_level_2){
 					case 1:  // Rent bike
@@ -107,7 +107,7 @@ void parsingCode(){
 				}
 				break;
 			}
-			case 5:  // Information Display
+			case 5:  
 			{
 				switch(menu_level_2){
 					case 1:  // Show Rental info
@@ -118,7 +118,7 @@ void parsingCode(){
 				}
 				break;
 			}
-			case 6:  // Program Control
+			case 6:  
 			{
 				switch (menu_level_2){
 					case 1:  // End program

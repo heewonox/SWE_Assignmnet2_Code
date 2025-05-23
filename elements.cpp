@@ -193,7 +193,7 @@ void RentalStatusList::addNewRentalStatus(string userID,Bicycle *bicycle){
  * @param result Array to store the found bicycles
  * @return Number of bicycles found
  */
-int RentalStatusList::fetchRentalStatusByID(string userID, Bicycle* result[]) const {
+int RentalStatusList::fetchRentalStatusByID(string userID, Bicycle* result[])  {
 	int count = 0;
 	// First pass: collect all bicycles rented by the user
 	for(int i = 0; i < idx; i++) {

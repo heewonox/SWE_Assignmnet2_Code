@@ -11,9 +11,9 @@ using namespace std;
  */
 class Accounts{
 private:
-	string id;        ///< User's unique identifier
-	string password;  ///< User's password
-	string phone;     ///< User's phone number
+	string id;        
+	string password;  
+	string phone;     
 public:
 	Accounts(string id,string password,string phone);
 	string getID();
@@ -27,8 +27,8 @@ public:
  */
 class AccountList{
 private:
-	Accounts* list[lenList];  ///< Array of account pointers
-	int idx;                  ///< Current number of accounts
+	Accounts* list[lenList];  
+	int idx;                  
 public:
 	AccountList();
 	bool isAdmin(string id,string password);
@@ -43,8 +43,8 @@ public:
  */
 class Bicycle{
 private:
-	string ID;          ///< Bicycle's unique identifier
-	string productName; ///< Name/model of the bicycle
+	string ID;         
+	string productName; 
 public:
 	Bicycle(string ID,string productName);
 	string getID();
@@ -58,8 +58,8 @@ public:
  */
 class BicycleList{
 private:
-	Bicycle* list[lenList];  ///< Array of bicycle pointers
-	int idx;                 ///< Current number of bicycles
+	Bicycle* list[lenList];  
+	int idx;                 
 public:
 	BicycleList();
 	void addNewBicycle(string id,string productName);
@@ -73,8 +73,8 @@ public:
  */
 class RentalStatus{
 private:
-	string userID;     ///< ID of the user who rented the bicycle
-	Bicycle *bicycle;  ///< Pointer to the rented bicycle
+	string userID;     
+	Bicycle *bicycle;  
 public:
 	RentalStatus(string userID,Bicycle* bicycle);
 	string getUserID();
@@ -88,12 +88,10 @@ public:
  */
 class RentalStatusList{
 private:
-	RentalStatus *list[lenList];  ///< Array of rental status pointers
-	int idx;                      ///< Current number of rentals
+	RentalStatus *list[lenList];  
+	int idx;                      
 public:
 	RentalStatusList();
 	void addNewRentalStatus(string userID,Bicycle *bicycle);
-	int getSize() const { return idx; }
-	RentalStatus* getRentalStatus(int index) const { return list[index]; }
-	int fetchRentalStatusByID(string userID, Bicycle* result[]) const;
+	int fetchRentalStatusByID(string userID, Bicycle* result[]);
 };
